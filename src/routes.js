@@ -3,6 +3,7 @@ const express = require("express")
 const routes = express.Router()
 routes.use(express.urlencoded({ extended: true }));
 routes.use(express.json());
+const db = require("./config/db")
 const ChangeScene = require("./Controllers/ChangeScene")
 const CreateScene = require("./Controllers/CreateScene")
 // - Configurando OBSWebSocket
@@ -40,7 +41,7 @@ routes.post("/change-scene", (req, res) => {
     message: "A cena do obs foi trocada para" + sceneName
   });
 })
-routes.post("/create-scene",(req,res) => CreateScene.create(req, res));
+routes.post("/create-scene",CreateScene.create);
 
 
 module.exports = routes

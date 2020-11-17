@@ -11,18 +11,24 @@ module.exports = {
             }
         }
         const query = `
-            INSERT INTO scenes {
-                sceneName
-            } VALUES($1)
-            RETURNING id
+            INSERT INTO scenes (
+                scenename
+            ) VALUES($1)
         `
         const values = [
             req.body.sceneName
         ]
+        console.log(req.body.sceneName)
+        console.log(db)
         db.query(query,values, (err, results) => {
-            if(err) return res.status(400)
-            return res.status(200).json(results)
+            if(err){ return res.status(400) }
+            console.log(results)
+            return
         })
+        
+        return res.status(200).json({
+            message:'This scene has been added to database'
+        })
+
     }
-    
 }
