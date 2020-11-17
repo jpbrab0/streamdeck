@@ -19,7 +19,11 @@ obs.connect(
 );
 
 routes.get("/", (req, res) => {
-  return res.status(200).json({ message: 'Teste' });
+    db.query(`SELECT * FROM scenes;`).then(query => {
+		return res.status(200).json({
+			message: query.rows
+		});
+    })
 });
 routes.post("/change-scene", (req, res) => {
   const keys = Object.keys(req.body);
