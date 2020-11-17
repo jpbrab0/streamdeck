@@ -1,5 +1,5 @@
 module.exports = {
-    index(sceneName, obs) {
+    change(sceneName, obs) {
         return obs.send("SetCurrentScene", {
           "scene-name": sceneName,
         });

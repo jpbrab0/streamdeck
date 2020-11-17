@@ -13,12 +13,9 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "obs-websocket-js": "^4.0.2",
-    "pg": "^8.5.1",
-    "pg-hstore": "^2.3.3",
-    "sequelize": "^6.3.5"
+    "pg": "^8.5.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.6",
-    "sequelize-cli": "^6.2.0"
+    "nodemon": "^2.0.6"
   }
 }
