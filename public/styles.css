@@ -1,0 +1,12 @@
+body{
+    font-family: sans-serif;
+}
+header{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+input.hidden{
+    display: none;
+}
