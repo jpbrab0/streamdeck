@@ -1,25 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Streamdeck</title>
-</head>
-<body>
-    <header>
-        <h1>Streamdeck</h1>
-    </header>
-    <section class="scenes">
-        {% for scene in scenes %}
-            <div class="scene">
-                <button form="change-scene">{{scene.scenename}}</button>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="styles.css">
+        <title>Streamdeck</title>
+    </head>
+    <body>
+        <header>
+            <h1>Streamdeck</h1>
+            <a href="/create">Criar Cena.</a>
+        </header>
+        <section class="scenes">
+            {% for scene in scenes %}
+                <div class="scene">
+                    <div class="row">
+                        <div class="redirect">
+                                <a href="/scene/{{scene.id}}">
+                                  <i class="material-icons">create</i>
+                                </a>
+                        </div>
+                        <form action="/delete-scene?_method=DELETE" method="post">
+                            <input class="hidden" type="text" name="id" value={{scene.id}} readonly>
+                            <button type="submit" id="deleteBtn">
+                                <i class="material-icons">delete</i>
+                            </button>
+                        </form>
 
-                <form action="/change-scene" method="post" id="change-scene">
-                    <input class="hidden" name="scenename" value="{{scene.scenename}}" readonly>
-                </form>
-            </div>
-        {% endfor %}
-    </section>
-</body>
+                    </div>
+                    <form action="/change-scene" method="post" id="change-scene">
+                        <input class="hidden" name="scenename" value={{scene.scenename}} readonly>
+                        <button type="submit">{{scene.scenename}}</button>
+                    </form>
+                </div>
+            {% endfor %}
+        </section>
+        <script src="redirect.js"></script>
+    </body>
+
 </html>

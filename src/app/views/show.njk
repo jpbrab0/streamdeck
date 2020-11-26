@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% for scene in data %}
+        <form action="/edit-scene?_method=PUT" method="post">
+            <input type="text" value={{scene.scenename}} name="scenename">
+            <input type="text" value={{scene.id}} name="id" hidden>
+            <button type="submit">Editar Cena.</button>
+        </form>
+    {% endfor %}
+</body>
+</html>

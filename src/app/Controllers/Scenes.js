@@ -6,7 +6,6 @@ module.exports = {
             if(err){ 
                 return res.send("Database error.")
             }
-            console.log(results.rows)
             return res.render("index", { scenes: results.rows })
         })
     },
@@ -36,16 +35,14 @@ module.exports = {
     delete(req,res){
         db.query(`DELETE FROM scenes WHERE id = $1`, [req.body.id], (err, results) => {
             if(err){
-                return res.status(400).json({
-                    message:'Database Error.'
-                })
+                return res.send(
+                    'Database Error.'
+                )
             }
 
             return
         })
-        return res.status(200).json({
-            message:'This scene has been deleted from database.'
-        })
+        return res.redirect("/")
     },
     edit(req,res){
        const query = `
@@ -54,26 +51,31 @@ module.exports = {
         WHERE id = $2
         `
         const values = [
-            req.body.sceneName,
+            req.body.scenename,
             req.body.id
         ]
         db.query(query, values, (err, results) => {
             if(err){
-                return res.status(400).json({
-                    message:`Database error.${err}`
-                })
+                return res.send(`Database error.${err}`)
             }
-            return res.status(200).json({
-                message:'This scene has been updated.'
-            })
+            return res.redirect("/")
 
         })
     },
+    show(req,res){
+        const id = req.params.id
+        db.query(`SELECT * FROM scenes WHERE id=$1`, [id], (err, results) => {
+            if(err){
+                return res.send("Database error.")
+            }
+            return res.render("show", {data: results.rows})
+        })
+    },
     changeScene(req,res) {
+        console.log(req.body.scenename)
         obs.send("SetCurrentScene", {
           "scene-name": req.body.scenename,
         });
-        console.log(req.body.scenename)
         return res.redirect("/")
     }
 }

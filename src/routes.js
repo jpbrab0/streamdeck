@@ -9,6 +9,7 @@ routes.get("/", Scenes.index);
 routes.get("/create", (req, res) => {
     return res.render("createScene")
 })
+routes.get("/scene/:id", Scenes.show)
 routes.post("/change-scene",Scenes.changeScene)
 routes.post("/create-scene",Scenes.create)
 routes.put("/edit-scene",Scenes.edit)
